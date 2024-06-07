@@ -42,7 +42,7 @@ map("n", "<C-Right>", ":vertical resize +3<CR>")
 
 -- Bufferline
 map("n", "<Tab>", ":bnext<cr>", { desc = "Move to next tab", noremap = true })
-map("n", "<A-Tab>", ":bprevious<cr>", { desc = "Move to previous tab", noremap = true })
+map("n", "<S-Tab>", ":bprevious<cr>", { desc = "Move to previous tab", noremap = true })
 map("n", "<leader>x", ":bdelete<cr>", { desc = "Delete the tab", noremap = true})
 
 
