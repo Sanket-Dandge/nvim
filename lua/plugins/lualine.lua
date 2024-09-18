@@ -73,6 +73,8 @@ return {
       return ''
     end
 
+    local navic = require('nvim-navic')
+
     require('lualine').setup {
       options = {
         theme = "auto",
@@ -120,6 +122,10 @@ return {
               return vim.bo.buftype == 'quickfix'
             end,
           },
+          function()
+            return navic.get_location()
+          end,
+
         },
         lualine_c = {},
         lualine_x = {},

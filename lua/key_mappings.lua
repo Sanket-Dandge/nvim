@@ -7,9 +7,6 @@ map("n", "<C-s>", "<cmd>w<cr>", { desc = "Save file", remap = true })
 -- ESC pressing jk or lk
 map("i", "jk", "<ESC>", { desc = "jk to esc", noremap = true })
 
--- Quit Neovim
--- map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit Buffer/Neovim", remap = true })
-
 -- Increment/decrement
 map("n", "+", "<C-a>", { desc = "Increment numbers", noremap = true })
 map("n", "-", "<C-x>", { desc = "Decrement numbers", noremap = true })
@@ -43,27 +40,21 @@ map("n", "<C-Right>", ":vertical resize +3<CR>")
 -- Bufferline
 map("n", "<Tab>", ":bnext<cr>", { desc = "Move to next tab", noremap = true })
 map("n", "<S-Tab>", ":bprevious<cr>", { desc = "Move to previous tab", noremap = true })
-map("n", "<leader>x", ":bdelete<cr>", { desc = "Delete the tab", noremap = true})
+map("n", "<leader>tc", ":bdelete<cr>", { desc = "Delete the tab", noremap = true })
+map("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "Open a new tab", noremap = true })
 
-
-local api = vim.api
-
--- Comments
-api.nvim_set_keymap("n", "<leader>co", "gcc", { desc = "Comment line", noremap = false })
-api.nvim_set_keymap("v", "<leader>co", "goc", { desc = "Comment block", noremap = false })
+-- Portal.nvim
+map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>", { desc = "Jumplist Backward" })
+map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>", { desc = "Jumplist Forward" })
 
 -- Telescope
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Telescope find files", noremap = true })
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Comment line", noremap = true })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Comment line", noremap = true })
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Comment line", noremap = true })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep", noremap = true })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Old files", noremap = true })
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers", noremap = true })
 
 -- Complete Selection
-map("n", "<C-a>", "ggVG", { desc = "Select all", noremap = false }) 
-
--- Portal.nvim 
-map("n", "<leader>o", "<cmd>Portal jumplist backward<cr>", { desc = "Jumplist Backward" })
-map("n", "<leader>i", "<cmd>Portal jumplist forward<cr>", { desc = "Jumplist Forward" })
+map("n", "<C-a>", "ggVG", { desc = "Select all", noremap = false })
 
 -- Gitsigns
 require('gitsigns').setup{
@@ -77,7 +68,7 @@ require('gitsigns').setup{
     end
 
     -- Navigation
-   map('n', ']c', function()
+    map('n', ']c', function()
       if vim.wo.diff then
         vim.cmd.normal({']c', bang = true})
       else
@@ -123,8 +114,12 @@ map("t", "<A-h>", function() require("nvterm.terminal").toggle "horizontal" end,
 map("n", "<A-i>", function() require("nvterm.terminal").toggle "floating" end, { desc = "Toggle floating term" })
 map("t", "<A-i>", function() require("nvterm.terminal").toggle "floating" end, { desc = "Toggle floating term" })
 
-
 map("n", "<leader>h", function() require("nvterm.terminal").new "horizontal" end, { desc = "New vertical term" })
 map("n", "<leader>v", function() require("nvterm.terminal").new "vertical" end, { desc = "New vertical term" })
 
+-- Tagbar Mapping
+map("n", "<F8>", "<cmd>TagbarToggle<CR>", { desc = "Toggle Tagbar", remap = true })
+
+-- Oil File Explorer Mapping
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
