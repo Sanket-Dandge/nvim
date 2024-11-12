@@ -2,11 +2,11 @@ return {
   "williamboman/mason.nvim",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
+    "jay-babu/mason-nvim-dap.nvim",
   },
   config = function()
     local mason = require("mason")
-    local mason_lspconfig = require("mason-lspconfig")  
-    
+    local mason_lspconfig = require("mason-lspconfig")
     mason.setup({
       ui = {
         icons = {
@@ -23,7 +23,7 @@ return {
         "cssls",
         "lua_ls",
         "pyright",
-        "clangd" 
+        "clangd"
       },
       automatic_installation = true,
     })

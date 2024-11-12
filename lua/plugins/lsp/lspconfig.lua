@@ -96,10 +96,9 @@ return {
       settings = {
         Lua = {
           diagnostics = {
-            global = { "vim" }, -- make language server recognize "vim" global
+            global = { "vim" },
           },
           workspace = {
-            -- make language server aware of runtime files 
             library = {
               [vim.fn.expand("$VIMRUNTIME/lua")] = true,
               [vim.fn.stdpath("config") .. "/lua"] = true,
