@@ -6,12 +6,15 @@ return {
     "mfussenegger/nvim-dap-python",
   },
   config = function ()
+    require("nvim-dap-virtual-text").setup()
     local dap = require('dap')
-    local dap_python = require("dap-python")
 
+                    -----------------------------------------
+                    ---             C++ Debugger          ---
+                    -----------------------------------------
     dap.adapters.lldb = {
       type = 'executable',
-      command = '/usr/bin/lldb-dap', -- adjust as needed, must be absolute path
+      command = '/usr/bin/lldb-dap',
       name = 'lldb'
     }
     dap.configurations.cpp = {
@@ -28,21 +31,12 @@ return {
           return { vim.fn.input("Arguments: ") }
         end,
         runInTerminal = true,
-        -- 💀
-        -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-        --
-        --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-        --
-        -- Otherwise you might get the following error:
-        --
-        --    Error on launch: Failed to attach to the target process
-        --
-        -- But you should be aware of the implications:
-        -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-        -- runInTerminal = false,
       },
     }
 
+                    -----------------------------------------
+                    ---           Python Debugger         ---
+                    -----------------------------------------
     dap.adapters.python = function(cb, config)
       if config.request == 'attach' then
         ---@diagnostic disable-next-line: undefined-field
@@ -71,16 +65,11 @@ return {
 
     dap.configurations.python = {
       {
-        -- The first three options are required by nvim-dap
-        type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+        type = 'python';
         request = 'launch';
         name = "Launch file";
-        -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-        program = "${file}"; -- This configuration will launch the current file if used.
+        program = "${file}";
         pythonPath = function()
-          -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-          -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-          -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
           local cwd = vim.fn.getcwd()
           if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
             return cwd .. '/venv/bin/python'

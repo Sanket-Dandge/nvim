@@ -22,4 +22,3 @@ require("lazy").setup({
 		lazy = false,
 	},
 })
-require("key_mappings")
