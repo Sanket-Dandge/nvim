@@ -34,6 +34,7 @@ return {
                         ---             Select all            ---
                         -----------------------------------------
     Mapper.map("n", "<C-a>", "gg<S-v>G", { noremap = true }, "Selection", "select_all", "Select all")
+    Mapper.map("n", "<Esc>", "<cmd>noh<cr>", { remap = true }, "Selection", "remove_highlight", "Remove Highlight After Searching")
 
                         -----------------------------------------
                         ---             Indenting             ---
@@ -44,7 +45,7 @@ return {
                         -----------------------------------------
                         ---               New tab             ---
                         -----------------------------------------
-    Mapper.map("n", "te", ":tabedit", { noremap = true }, "File", "new_tab", "Creating New Tab")
+    Mapper.map("n", "te", ":e ", { noremap = true }, "File", "new_tab", "Creating New Tab")
 
                         -----------------------------------------
                         ---             Split window          ---
@@ -66,6 +67,7 @@ return {
     Mapper.map("n", "<Tab>", ":bnext<cr>", { noremap = true }, "File", "tab_next", "Move to next tab")
     Mapper.map("n", "<S-Tab>", ":bprevious<cr>", { noremap = true }, "File", "tab_previous", "Move to previous tab")
     Mapper.map("n", "<leader>tc", ":bdelete<CR>", { noremap = true }, "File", "tab_close", "Close the current tab")
+    Mapper.map("n", "<leader>gB", ":BufferLinePick<CR>", { remap = true }, "File", "tab_change", "Change tab using characters")
 
                         -----------------------------------------
                         ---             Portal.nvim           ---

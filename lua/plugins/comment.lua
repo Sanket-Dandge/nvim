@@ -7,7 +7,7 @@ return {
 			block = "gtb", "gtc",
 		},
 		opleader = {
-			line = "goc", 
+			line = "goc",
 			block = "gob",
 		},
 	},

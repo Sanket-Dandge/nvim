@@ -25,6 +25,9 @@ return {
 				--style = "onedark"
 			})
 			require("telescope").load_extension("ui-select")
+      -- init.lua
+      require("telescope").load_extension("scope")
+      require("telescope").load_extension("noice")
 		end,
 	},
 }
