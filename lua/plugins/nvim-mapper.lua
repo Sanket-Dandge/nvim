@@ -85,6 +85,9 @@ return {
     Mapper.map("n", "<leader>fd", function()
       require('telescope.builtin').find_files({ cwd = '~/.config/nvim' })
     end, { noremap = true, silent = true }, "Telescope", "find_nvim_config_files", "Find files in nvim config")
+    Mapper.map("n", "<leader>fs", function()
+      require('telescope.builtin').find_files({ cwd = '~/.config/bspwm' })
+    end, { noremap = true, silent = true }, "Telescope", "find_bspwm_config_files", "Find files in bspwm config")
 
                         -----------------------------------------
                         ---               Gitsigns            ---
