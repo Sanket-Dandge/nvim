@@ -168,7 +168,7 @@ return {
                         -----------------------------------------
                         ---            Noice Dismiss          ---
                         -----------------------------------------
-    Mapper.map("n", "<leader>nd", "<cmd>NoiceDismiss<cr>", { noremap = true, silent = true }, "Message", "dismiss_noice", "Dismiss Noice Message")
+    Mapper.map("n", "<leader>z", "<cmd>NoiceDismiss<cr>", { noremap = true, silent = true }, "Message", "dismiss_noice", "Dismiss Noice Message")
 
                         -----------------------------------------
                         ---                 LSP               ---

@@ -13,6 +13,7 @@ return {
           disable = { "latex" },
         },
 				indent = { enable = true },
+        ensure_installed = { "regex" },
 			})
 		end,
 	},

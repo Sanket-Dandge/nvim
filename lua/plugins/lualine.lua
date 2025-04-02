@@ -2,7 +2,6 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = {
     -- display lsp clients in lualine
-    { "yavorski/lualine-lsp-client-name.nvim" },
   },
   event = "VeryLazy",
   config = function()
