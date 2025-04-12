@@ -2,13 +2,14 @@ local opt = vim.opt -- for conciseness
 
 -- Line Numbers
 opt.number = true
-opt.showtabline = 2
+opt.showtabline = 4
 
 -- Tabs & Indentation
-opt.tabstop = 2
-opt.shiftwidth = 2
+opt.tabstop = 4
+opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
+opt.breakindent = true
 
 -- Line Wrapping
 opt.wrap = false

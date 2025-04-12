@@ -35,6 +35,10 @@ return {
 					never_show = {},
 				},
 			},
+            window = {
+                width = 30,
+                position = "left",
+            },
 		})
 	end,
 }

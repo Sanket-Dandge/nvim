@@ -190,5 +190,20 @@ return {
       end
     end, { silent = true }, "Snippets", "snippet_jump_previous", "Jump to previous snippet placeholder")
 
+                        -----------------------------------------
+                        ---              Conform              ---
+                        -----------------------------------------
+    Mapper.map(
+      { "n", "v" },
+      "<leader>fa",
+      function()
+        require("conform").format({ async = true, lsp_fallback = true })
+      end,
+      { noremap = true, silent = true },
+      "Conform",
+      "format_file_or_range",
+      "Format file or selected range with Conform"
+    )
+
   end,
 }
