@@ -44,6 +44,8 @@ opt.undofile = true
 -- Mapleader
 vim.g.mapleader = " "
 
+vim.o.guifont = "Monospace:h8"
+
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
 

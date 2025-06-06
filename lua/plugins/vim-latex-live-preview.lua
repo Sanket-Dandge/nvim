@@ -1,7 +1,7 @@
 return {
   'xuhdev/vim-latex-live-preview',
   ft = 'tex',
-  lazy = false,  -- Force immediate loading
+  lazy = false,
   config = function()
     vim.g.livepreview_previewer = 'zathura'
     vim.g.livepreview_engine = 'pdflatex'
