@@ -82,6 +82,7 @@ return {
           ["l"] = "open",
           ["h"] = "close_node",
           ["<CR>"] = "open_drop",
+          ["S"] = "set_root", -- Press S to set root to selected folder
         },
       },
 

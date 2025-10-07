@@ -22,3 +22,5 @@ require("lazy").setup({
 		lazy = false,
 	},
 })
+
+vim.opt.guifont = { "JetBrainsMono NF", ":h7" }

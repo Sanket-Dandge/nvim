@@ -488,14 +488,23 @@ return {
             "lsp_definitions",
             "Go to definition"
         )
-        Mapper.map("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true }, "LSP", "lsp_code_action", "Taking code action")
+        Mapper.map( "n", "<leader>ca", function() vim.lsp.buf.code_action({ context = { only = { "quickfix", "source.fixAll" } }, apply = true }) end, { noremap = true, silent = true }, "LSP", "lsp_code_action", "Taking code action")
         Mapper.map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true }, "LSP", "lsp_rename", "Renaming words")
         Mapper.map("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true }, "LSP", "lsp_hover", "Info about variables")
         Mapper.map("n", "<leader>rs", ":LspRestart<CR>", { noremap = true, silent = true }, "LSP", "lsp_restart", "Restarting LSP")
 
         Mapper.map("n", "gD", vim.lsp.buf.declaration, { remap = true, silent = true }, "LSP", "lsp_declaration", "Instances where variables are declared")
         Mapper.map("n", "gi", "<cmd>Telescope lsp_implementations<CR>", { noremap = true, silent = true }, "LSP", "lsp_implementations", "Telescope LSP implementations")
-        Mapper.map("n", "gR", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true }, "LSP", "lsp_references", "Telescope LSP references}")
+        Mapper.map("n", "gR", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true }, "LSP", "lsp_references", "Telescope LSP references")
+        -- Mapper.map(
+        --     "n",
+        --     "<leader>gs",
+        --     function() vim.lsp.buf.switch_source_header() end, -- wrap the function
+        --     { noremap = true, silent = true },
+        --     "LSP", 
+        --     "switch_source_header", 
+        --     "Switch Source/Header"
+        -- )
 
         -----------------------------------------
         ---              Conform              ---
