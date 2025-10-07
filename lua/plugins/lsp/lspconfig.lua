@@ -4,10 +4,11 @@ return {
   dependencies = {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
-  config = function()
-    local lspconfig = require("lspconfig")
 
-    -- 󰒓 Diagnostic signs
+  config = function()
+    --------------------------------------------------------------------------
+    -- 🧠 Diagnostic UI
+    --------------------------------------------------------------------------
     local signs = {
       Error = " ",
       Warn  = " ",
@@ -15,8 +16,7 @@ return {
       Info  = " ",
     }
     for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      vim.fn.sign_define("DiagnosticSign" .. type, { text = icon, texthl = "DiagnosticSign" .. type })
     end
 
     vim.diagnostic.config {
@@ -24,56 +24,52 @@ return {
       signs = true,
       underline = true,
       severity_sort = true,
-      float = {
-        border = "rounded",
-        source = "always",
-      },
+      float = { border = "rounded", source = "always" },
     }
 
-    -- LSP capabilities (with optional cmp support)
-    local ok_cmp, cmp = pcall(require, "blink.cmp") -- fallback to your module
+    --------------------------------------------------------------------------
+    -- 🧩 Capabilities
+    --------------------------------------------------------------------------
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local ok_cmp, cmp = pcall(require, "blink.cmp")
     if ok_cmp then
       capabilities = cmp.get_lsp_capabilities()
     end
 
-    -- Common on_attach (extend with keymaps/format later)
+    --------------------------------------------------------------------------
+    -- 🔗 Common on_attach
+    --------------------------------------------------------------------------
     local function on_attach(_, bufnr)
-      -- Example: keymap for formatting
       vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr, desc = "Format buffer" })
     end
 
-    -- Define language servers and basic config
-    local servers = {
-      html         = {},
-      clangd       = {},
-      tailwindcss  = {},
-      pyright      = {},
-      ts_ls     = {},
-    }
-
-    for server, opts in pairs(servers) do
-      lspconfig[server].setup {
+    --------------------------------------------------------------------------
+    -- 🌐 Define LSP configurations (new API)
+    --------------------------------------------------------------------------
+    local function define(server, opts)
+      vim.lsp.config(server, vim.tbl_deep_extend("force", {
         capabilities = capabilities,
         on_attach = on_attach,
-        settings = opts.settings,
-      }
+      }, opts or {}))
     end
 
-    -- Emmet LSP (special)
-    lspconfig["emmet_ls"].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    -- Core servers
+    define("html", {})
+    define("clangd", {})
+    define("tailwindcss", {})
+    define("pyright", {})
+    define("ts_ls", {})
+
+    -- Emmet
+    define("emmet_ls", {
       filetypes = {
         "html", "typescriptreact", "javascriptreact",
-        "css", "sass", "scss", "less", "svelte"
+        "css", "sass", "scss", "less", "svelte",
       },
-    }
+    })
 
-    -- Lua LSP (special)
-    lspconfig["lua_ls"].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    -- Lua
+    define("lua_ls", {
       settings = {
         Lua = {
           diagnostics = { globals = { "vim" } },
@@ -87,6 +83,21 @@ return {
           telemetry = { enable = false },
         },
       },
-    }
+    })
+
+    --------------------------------------------------------------------------
+    -- 🚀 Enable servers (new API)
+    --------------------------------------------------------------------------
+    for _, server in ipairs({
+      "html",
+      "clangd",
+      "tailwindcss",
+      "pyright",
+      "ts_ls",
+      "emmet_ls",
+      "lua_ls",
+    }) do
+      vim.lsp.enable(server)
+    end
   end,
 }
