@@ -13,6 +13,7 @@ return {
         }
         local Mapper = require "nvim-mapper"
         -- local ls = require("luasnip")
+        local builtin = require('telescope.builtin')
         local gitsigns = require "gitsigns"
         vim.g.mapleader = " "
 
@@ -174,6 +175,18 @@ return {
             "Telescope",
             "live_grep",
             "Live Grep"
+        )
+        Mapper.map(
+            "n",
+            "<leader>sg",
+            function()
+                local word = vim.fn.expand("<cword>")
+                builtin.live_grep({ default_text = word })
+            end,
+            { noremap = true, silent = true },
+            "Telescope",
+            "live_grep_specific_word",
+            "Live grep a chosen specific word"
         )
         Mapper.map(
             "n",
@@ -417,37 +430,37 @@ return {
         -----------------------------------------
         ---             Dap Keymaps           ---
         -----------------------------------------
-        local dap = require "dap"
-        local dapui = require "dapui"
-
-        Mapper.map(
-            "n",
-            "<space>b",
-            dap.toggle_breakpoint,
-            { noremap = true },
-            "Dap",
-            "toggle_breakpoint",
-            "Toggle Breakpoint"
-        )
-        Mapper.map("n", "<space>gb", dap.run_to_cursor, { noremap = true }, "Dap", "run_to_cursor", "Run to Cursor")
-        Mapper.map("n", "<space>?", function()
-            dapui.eval(nil, { enter = true })
-        end, { remap = true }, "Dap", "evaluate_expression", "Evaluate Expression")
-        Mapper.map("n", "<F1>", dap.continue, { remap = true }, "Dap", "continue_execution", "Continue Execution")
-        Mapper.map("n", "<F2>", dap.step_into, { remap = true }, "Dap", "step_into", "Step Into")
-        Mapper.map("n", "<F3>", dap.step_over, { remap = true }, "Dap", "step_over", "Step Over")
-        Mapper.map("n", "<F4>", dap.step_out, { remap = true }, "Dap", "step_out", "Step Out")
-        Mapper.map("n", "<F5>", dap.step_back, { remap = true }, "Dap", "step_back", "Step Back")
-        Mapper.map("n", "<F13>", dap.restart, { remap = true }, "Dap", "restart", "Restart Debugging")
-        Mapper.map(
-            "n",
-            "<Leader>du",
-            "<cmd>lua require'dapui'.toggle()<CR>",
-            { noremap = true, silent = true },
-            "Dap",
-            "toggle_dapui",
-            "Toggle DapUI"
-        )
+        -- local dap = require "dap"
+        -- local dapui = require "dapui"
+        --
+        -- Mapper.map(
+        --     "n",
+        --     "<space>b",
+        --     dap.toggle_breakpoint,
+        --     { noremap = true },
+        --     "Dap",
+        --     "toggle_breakpoint",
+        --     "Toggle Breakpoint"
+        -- )
+        -- Mapper.map("n", "<space>gb", dap.run_to_cursor, { noremap = true }, "Dap", "run_to_cursor", "Run to Cursor")
+        -- Mapper.map("n", "<space>?", function()
+        --     dapui.eval(nil, { enter = true })
+        -- end, { remap = true }, "Dap", "evaluate_expression", "Evaluate Expression")
+        -- Mapper.map("n", "<F1>", dap.continue, { remap = true }, "Dap", "continue_execution", "Continue Execution")
+        -- Mapper.map("n", "<F2>", dap.step_into, { remap = true }, "Dap", "step_into", "Step Into")
+        -- Mapper.map("n", "<F3>", dap.step_over, { remap = true }, "Dap", "step_over", "Step Over")
+        -- Mapper.map("n", "<F4>", dap.step_out, { remap = true }, "Dap", "step_out", "Step Out")
+        -- Mapper.map("n", "<F5>", dap.step_back, { remap = true }, "Dap", "step_back", "Step Back")
+        -- Mapper.map("n", "<F13>", dap.restart, { remap = true }, "Dap", "restart", "Restart Debugging")
+        -- Mapper.map(
+        --     "n",
+        --     "<Leader>du",
+        --     "<cmd>lua require'dapui'.toggle()<CR>",
+        --     { noremap = true, silent = true },
+        --     "Dap",
+        --     "toggle_dapui",
+        --     "Toggle DapUI"
+        -- )
 
         -----------------------------------------
         ---               TreeSJ              ---
